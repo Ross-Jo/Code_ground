@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+// 본인이 작은 규모의 다양한 테스트 케이스를 많이 만들어보고 제출 전 미리 실행해 볼 것
+
 class Valid{
 	boolean bool;
 	int sLength;
