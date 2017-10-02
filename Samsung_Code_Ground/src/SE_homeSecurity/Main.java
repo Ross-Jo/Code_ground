@@ -5,7 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main { // 단순한 방법이라도 시간 복잡도는 철처히 계산하고 들어가자. 다중 for문 구조의 경우 시간 초과의 위험이 크다.
+	                // 시뮬레이션 코드 작성시 작성 속도도 중요하지만, 코드상 실수가 있어서는 안된다.
 
 	public static int counter(int[][] map, int N, int M){
 		int ans = -1;
