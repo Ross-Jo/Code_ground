@@ -54,6 +54,7 @@ public class Main {
 
 		ArrayList<int[]> neighbors = new ArrayList<int[]>(); // ArrayList 사용방법 복습하기, 그리드의 그래프 표현 복습하기, BFS 복습하기
 		
+		// 문제의 특수성을 간과하지 말자
 		switch(map[i][j]){
 		case 1: 
 			checkNeighbors(map, N, M, i, j, neighbors, 0);
