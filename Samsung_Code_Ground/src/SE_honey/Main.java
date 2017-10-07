@@ -10,25 +10,32 @@ public class Main {
 	// 시간이 오래 걸렸던 부분 : 구현 
 	/*
 	 * a. visited에서의 이전 기록에 대한 삭제 및 신규 기록
-	 * b. dfs의 원리를 이용한 부분집합 설정 및 검색. 특정 바스킷 안에서 어떻게  =<C 이면서 제곱합이 최대인 조합을 찾을 것인가?
-	 * c. 그리드 합 - 2중 for문으로 일일히 더하는 수밖에 없는가? 
+	 * b. DFS의 원리를 이용한 부분집합 설정 및 검색. 특정 바스킷 안에서 어떻게  =<C 이면서 제곱합이 최대인 조합을 찾을 것인가?
+	 * c. 그리드 합 - 2중 for문으로 일일히 더하는 수밖에 없는가?
+	 *    CF) 1차원 int array에 대한 합 : IntStream.of(array).sum();
+	 * 유의사항 : 구현을 위한 문제 정의를 좀 더 엄밀하게하고 명확하게 이해해야 함, DFS, BFS, 트리 등 재귀 구조를 이용하는 부분에 대한 복습필요 
 	 * 
 	 * */
 	public static int[][] tmp_visited;
 	public static int max_income;
+	public static int tmp_max;
 	
 	public static int findMaxIncome(int[][] map, int N, int M, int C, int[][] visited){
 		max_income = 0;
+		int tmp = 0;
 		
 		for(int i=0; i<N; i++){
 			for(int j=0; j<=N-M; j++){
 				if((!isVisited(visited[i], j, j+M-1) && partialSum(map[i], j, j+M-1)<=C)){
-					max_income = Math.max(max_income, calcSqSum(map[i], j, j+M-1));
-					tmp_visited = checkVisit(N, i, j, j+M-1);
+					if(max_income < (tmp = calcSqSum(map[i], j, j+M-1))){ // 갱신이 될 때에만 기록할 것
+						max_income = tmp;
+						tmp_visited = checkVisit(N, i, j, j+M-1);
+					}
 				}
 				else if(!isVisited(visited[i], j, j+M-1)){
 					int[] checker = new int[N];
 					int sum = 0;
+					tmp_max = 0;
 					max_income = Math.max(max_income, findMax(map[i], 0, M, C, j, j+M-1, checker, sum, i));
 				}
 			}
@@ -46,7 +53,6 @@ public class Main {
 	public static int findMax(int[] row, int cnt, int depth, int C, 
 			                  int startIndex, int endIndex, int[] checker, int sum, int rowIndex){
 		
-		int tmp_max = 0;
 		int tmp = 0;
 		
 		if(cnt==depth && sum <=C){
@@ -55,18 +61,23 @@ public class Main {
 					tmp += Math.pow(row[i], 2);
 				}
 			}
-			if(tmp>=max_income) tmp_visited = checkVisit(row.length, rowIndex, startIndex, endIndex);
+			if(tmp > max_income) {
+				tmp_visited = checkVisit(row.length, rowIndex, startIndex, endIndex);
+			}
 			tmp_max = Math.max(tmp_max, tmp);
+			return tmp_max;
+		}
+		else if(cnt==depth){
 			return tmp_max;
 		}
 		
 		checker[startIndex+cnt] = 1;
-		sum += checker[startIndex+cnt];
-		if(sum <=C) findMax(row, cnt+1, depth, C, startIndex, endIndex, checker, sum, rowIndex);
+		sum += row[startIndex+cnt];
+		findMax(row, cnt+1, depth, C, startIndex, endIndex, checker, sum, rowIndex);
 		
 		checker[startIndex+cnt] = 0;
-		sum -= checker[startIndex+cnt];
-		if(sum <=C) findMax(row, cnt+1, depth, C, startIndex, endIndex, checker, sum, rowIndex);
+		sum -= row[startIndex+cnt];
+		findMax(row, cnt+1, depth, C, startIndex, endIndex, checker, sum, rowIndex);
 		
 		return tmp_max;
 	}
