@@ -1,4 +1,4 @@
-package SE_honey;
+package SE_honey; // 수정필요
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -16,14 +16,14 @@ public class Main {
 	 * */
 	public static int[][] tmp_visited;
 	public static int max_income;
+	
 	public static int findMaxIncome(int[][] map, int N, int M, int C, int[][] visited){
 		max_income = 0;
-		int tmp = 0;
 		
 		for(int i=0; i<N; i++){
 			for(int j=0; j<=N-M; j++){
-				if((!isVisited(visited[i], j, j+M-1) && (tmp = calcSqSum(map[i], j, j+M-1))<=C)){
-					max_income = Math.max(max_income, tmp);
+				if((!isVisited(visited[i], j, j+M-1) && partialSum(map[i], j, j+M-1)<=C)){
+					max_income = Math.max(max_income, calcSqSum(map[i], j, j+M-1));
 					tmp_visited = checkVisit(N, i, j, j+M-1);
 				}
 				else if(!isVisited(visited[i], j, j+M-1)){
@@ -69,6 +69,14 @@ public class Main {
 		if(sum <=C) findMax(row, cnt+1, depth, C, startIndex, endIndex, checker, sum, rowIndex);
 		
 		return tmp_max;
+	}
+	
+	public static int partialSum(int[] row, int startIndex, int endIndex){
+		int ret = 0;
+		for (int i = startIndex; i <= endIndex; i++) {
+			ret += row[i];
+		}
+		return ret;
 	}
 	
 	public static int calcSqSum(int[] row, int startIndex, int endIndex){
