@@ -48,7 +48,7 @@ import java.util.Vector;
 class Comp implements Comparator<Integer>{
 	@Override
 	public int compare(Integer o1, Integer o2){
-		return o1 > o2 ? 1 : (o1 == o2) ? 0 : -1; // 왼쪽수가 더 크면 음수, 같으면 0, 오른쪽 수가 더 크면 양수를 반환한다. 
+		return o1 > o2 ? 1 : (o1 == o2) ? 0 : -1; // 왼쪽수가 더 크면 양수, 같으면 0, 오른쪽 수가 더 크면 음수를 반환한다. 
 	}
 }
 
