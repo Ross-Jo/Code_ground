@@ -8,7 +8,7 @@ public class Main {
 	public static int N;
 	public static int[] level = {50000, 10000, 5000, 1000, 500, 100, 50, 10};
 	
-	public static int[] compChange(){
+	public static int[] compChange(){ // Greedy method로 해결가능
 		int[] amount = new int[level.length];
 		for(int i=0; i<level.length; i++){
 			amount[i] = N/level[i];
