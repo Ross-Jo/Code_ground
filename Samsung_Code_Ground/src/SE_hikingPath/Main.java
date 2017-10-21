@@ -59,38 +59,38 @@ public class Main {
 					(check[i+d[k][0]][j+d[k][1]]==0) &&
 					(card == true)) {
 				
-				for (int h = 1; h <= K; ++h) {
-					if ((map[i][j] > map[i + d[k][0]][j + d[k][1]] - h)) {
-
-						boolean hit = false;
-
-						for (int re = 0; re < d.length; ++re) {
-							if ((0 <= (i + d[k][0] + d[re][0]) && (i + d[k][0] + d[re][0]) < N)
-									&& (0 <= (j + d[k][1] + d[re][1]) && (j + d[k][1] + d[re][1]) < N))
-								if (((map[i + d[k][0]][j + d[k][1]] - h) > map[i + d[k][0] + d[re][0]][j + d[k][1] + d[re][1]])) {
-									
-									hit = true;
-									
-									card = false;
-									check[i + d[k][0]][j + d[k][1]] = 1;
-									length++;
-									
-									DFS(map, check, N, K, i + d[k][0] + d[re][0], j + d[k][1] + d[re][1], card, length);
-									
-									// DFS 실행후 방문여부의 마킹을 해제하는 과정에 다시 한 번 주목하고 패턴으로 익혀두자
-									card = true;
-									check[i + d[k][0]][j + d[k][1]] = 0;
-									check[i + d[k][0] + d[re][0]][j + d[k][1] + d[re][1]] = 0;
-									length--;
-								}
-						}
-						if (card == true && hit == false) { // 문제의 조건을 첫 설계 때 반영하지 않고 뒤늦게 추가한 부분인데, 초기에 문제 조건에 유의하자.
-							length++;                       // 땅을 팔 수 있고, 등산로를 제외한 주변이 온통 현 지점보다 높은 지형일 경우 H만큼 땅을 파는 행위를 실현하고 maximum length의 등산로를 도출, 기록한다. 
-							if (length > tmp_max) tmp_max = length;
-							length--;
+					for (int h = 1; h <= K; ++h) {
+						if ((map[i][j] > map[i + d[k][0]][j + d[k][1]] - h)) {
+	
+							boolean hit = false;
+	
+							for (int re = 0; re < d.length; ++re) {
+								if ((0 <= (i + d[k][0] + d[re][0]) && (i + d[k][0] + d[re][0]) < N) &&
+								    (0 <= (j + d[k][1] + d[re][1]) && (j + d[k][1] + d[re][1]) < N))
+									if (((map[i + d[k][0]][j + d[k][1]] - h) > map[i + d[k][0] + d[re][0]][j + d[k][1] + d[re][1]])) {
+										
+										hit = true;
+										
+										card = false;
+										check[i + d[k][0]][j + d[k][1]] = 1;
+										length++;
+										
+										DFS(map, check, N, K, i + d[k][0] + d[re][0], j + d[k][1] + d[re][1], card, length);
+										
+										// DFS 실행후 방문여부의 마킹을 해제하는 과정에 다시 한 번 주목하고 패턴으로 익혀두자
+										card = true;
+										check[i + d[k][0]][j + d[k][1]] = 0;
+										check[i + d[k][0] + d[re][0]][j + d[k][1] + d[re][1]] = 0;
+										length--;
+									}
+							}
+							if (card == true && hit == false) { // 문제의 조건을 첫 설계 때 반영하지 않고 뒤늦게 추가한 부분인데, 초기에 문제 조건에 유의하자.
+								length++;                       // 땅을 팔 수 있고, 등산로를 제외한 주변이 온통 현 지점보다 높은 지형일 경우 H만큼 땅을 파는 행위를 실현하고 maximum length의 등산로를 도출, 기록한다. 
+								if (length > tmp_max) tmp_max = length;
+								length--;
+							}
 						}
 					}
-				}
 			}
 		}
 	}
