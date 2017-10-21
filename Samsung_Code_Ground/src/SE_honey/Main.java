@@ -16,7 +16,7 @@ public class Main {
 	 *
 	 * [개선해야 할 점/이슈]
 	 * 구현을 위한 문제 정의를 좀 더 엄밀하게하고 명확하게 이해해야 함, DFS, BFS, 트리 등 재귀 구조를 이용하는 부분에 대한 복습필요 
-	 * - 전역변수의 활용 : 문제에서 불변하는 값인 경우 전역변수로 빼서 활용이 용이하게 하자 -> 공통으로 쓰이는 불변값을 전역으로 뺴주니, 넘겨야 할 파라미터가 훨씬 간결해졌다. 
+	 * - 전역변수의 활용 : 문제에서 불변하는 값인 경우 전역변수로 빼서 활용이 용이하게 하자 -> 공통으로 쓰이는 불변값을 전역으로 빼주니, 넘겨야 할 파라미터가 훨씬 간결해졌다. 
 	 * - DFS/BFS를 활용해 코드 작성시, 각 재귀 단계마다 stack에 저장되는값, 재귀를 함과 동시에 가지고 다녀야 하는 값을 잘 판별해야 함(기본적인 내용이지만 다시 한 번 숙지하자). 참고 : https://books.google.co.kr/books?id=VPzHDgAAQBAJ&pg=PA59&lpg=PA59&dq=%EC%9E%AC%EA%B7%80%ED%95%A8%EC%88%98+stack+%EC%A0%80%EC%9E%A5&source=bl&ots=I_MCleoS1p&sig=MXFu95FM22e06WnNzDeK86dQrFk&hl=ko&sa=X&ved=0ahUKEwj2naDbvN7WAhUJvrwKHQ8pAroQ6AEIWzAI#v=onepage&q=%EC%9E%AC%EA%B7%80%ED%95%A8%EC%88%98%20stack%20%EC%A0%80%EC%9E%A5&f=false
 	 * - DFS/BFS에서 전역변수 활용 시, 각 변수의 의미를 명확히 하고, 이에 따른 초기화 위치를 명확히 설정하자. 혹여 의도치 않은 찌꺼기가 껴 이상한 결과를 내는것을 방지하자. 
 	 * - 배열 사용 시, ArrayIndexOutofBound 에러에 대하여 항상 염두에 두고 해당 에러가 발생하지 않도록 유의하자
