@@ -48,9 +48,7 @@ public class Main {
 		for(int k=0; k<d.length; ++k){
 			if((0<=(i+d[k][0]) && (i+d[k][0])<N) && // 가장자리를 항상 체크해주자. - 자주 하는 것이지만 혹여나 잊지말것
 			   (0<=(j+d[k][1]) && (j+d[k][1])<N) &&
-			   
 			   (check[i+d[k][0]][j+d[k][1]]==0) &&
-			   
 			   (map[i+d[k][0]][j+d[k][1]]<map[i][j])){
 				
 				DFS(map, check, N, K, i+d[k][0], j+d[k][1], card, length);
@@ -58,9 +56,7 @@ public class Main {
 			}
 			else if((0<=(i+d[k][0]) && (i+d[k][0])<N) &&
 					(0<=(j+d[k][1]) && (j+d[k][1])<N) &&
-					
 					(check[i+d[k][0]][j+d[k][1]]==0) &&
-					
 					(card == true)) {
 				
 				for (int h = 1; h <= K; ++h) {
