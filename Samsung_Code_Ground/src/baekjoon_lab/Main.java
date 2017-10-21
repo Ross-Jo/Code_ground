@@ -20,50 +20,27 @@ public class Main {
 	public static int[][] direction = {{0,-1},{-1,0},{0,1},{1,0}}; // 좌, 상, 우, 하
 	public static int max_area; // 안전영역의 최대값
 	
-	public static void printer(int[][] map){
-		for(int i=0; i<N; i++){
-			for(int j=0; j<M; j++){
-				System.out.print(map[i][j]+" ");
-			}
-			System.out.println();
-		}
-	}
-	
-	public static int[][] copyArray(int[][] map){
-		int[][] copy = new int[map.length][map[0].length];
-		for(int i=0; i<copy.length; i++){
-			copy[i] = Arrays.copyOf(map[i], map[i].length);
-		}
-		return copy;
-	}
-	
 	public static void chooseWall(int wallNumber, int[][] map){
 		if(wallNumber==3){
 			int[][] copy = copyArray(map);
-//			int[][] copy = new int[map.length][map[0].length];
-//			System.arraycopy(map, 0, copy, 0, map.length);
 
-			/* arraycopy의 문제점이 뭐지?	: 몇몇 한글문서에서 arraycopy를 깊은 복사라고 표시해 놓은것이 있는데 알고보니 깊은 복사가 아니라 얕은 복사 였음.
+			/* int[][] copy = new int[map.length][map[0].length]; 
+			 * System.arraycopy(map, 0, copy, 0, map.length);
+			 * 위와 같은 코드 사용시 원하는 대로 연산 진행이 되지 않음.
+			 * 
+			 * arraycopy의 문제점이 뭐지?	: 몇몇 한글문서에서 arraycopy를 깊은 복사라고 표시해 놓은것이 있는데, 알고보니 깊은 복사가 아니라 얕은 복사 였음.
 			 * (참고 : https://stackoverflow.com/questions/15135104/system-arraycopy-copies-object-or-reference-to-object)
 			 * 그래서 clone했다고 생각한 객체 변경 시, 원본 객체가 같이 변경되었던 것임. 다음부터는 해당 함수 사용에 유의할 것.
 			 */
-
-//			System.out.println(map+" "+copy);
-//			System.out.println("원본");
-//			printer(map); System.out.println();
+			
 			virus(copy);
-//			System.out.println("복사본");
-//			printer(copy); System.out.println();
 			return;
 		}
 
-//		System.out.println("FOR문 전 원본:"+map);
 		for(int i=0; i<N; i++){
 			for(int j=0; j<M; j++){
 				if(map[i][j]==0){
 					map[i][j] = 1;
-//					System.out.println(map);
-//					printer(map); System.out.println();
 					chooseWall(wallNumber+1, map);
 					map[i][j] = 0;
 				}
@@ -71,6 +48,16 @@ public class Main {
 		}
 	}
 	
+	// 3개의 벽을 세운 후, 각 케이스에 대한 바이러스 퍼짐 및 안전영역 검사를 위한 map 복사본을 따로 만듦
+	public static int[][] copyArray(int[][] map){
+		int[][] copy = new int[map.length][map[0].length];
+		for(int i=0; i<copy.length; i++){
+			copy[i] = Arrays.copyOf(map[i], map[i].length); // Array.copyOf는 1차원 배열에 대한 깊은 복사를 시행한다. 
+		}
+		return copy;
+	}
+	
+	// 지도상에 바이러스가 있다고 표시된 부분에 한하여 BFS를 시행함
 	public static void virus(int[][] map){
 		for(int i=0; i<N; i++){
 			for(int j=0; j<M; j++){
@@ -79,12 +66,10 @@ public class Main {
 				}
 			}
 		}
-//		System.out.println("BFS 종료: "+map);
-//		printer(map); System.out.println();
-		
 		max_area = Math.max(max_area, countArea(map));
 	}
 	
+	// BFS 시행
 	public static void BFS(int[][] map, Node root){
 		Queue<Node> q = new LinkedList<Node>();
 		
