@@ -37,6 +37,8 @@ import java.util.Vector;
  *     class Comp implements Comparator<Integer>와 같이 새로운  클래스를 선언하고, compare메소드를 오버라이드 한다.
  *     import java.util.Comparator; 를 해줘야 함을 잊지말자
  *     
+ *     CF) https://brunch.co.kr/@kd4/7
+ *     
  *   : Array와 ArrayList간의 차이점을 명확히 알자(Array vs ArrayList)
  *     사이즈 >> 초기화시 고정 / 초기화시 사이즈를 표시하지 않음. 유동적
  *     속도 >> 초기화시 메모리에 할당되어 속도가 빠르다 / 추가시 메모리를 재할당하여 속도가 느리다
